@@ -6,107 +6,80 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Provider} from 'react-redux';
+import {SignInScreen, SignUpScreen} from 'screens/Auth';
+import {HomeScreen} from 'screens/Home';
+import {SettingScreen} from 'screens/Setting';
+import {SelectBookScreen} from 'screens/Answer';
+import TabBar from 'components/TabBar';
+import {BLACK, MAIN} from 'utils/color';
+import configureStore from 'store';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const store = configureStore();
 
-const Section: React.FC<{
-  title: string;
-}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+const RootStack = createStackNavigator<RootStackType>();
+const AuthStack = createStackNavigator<AuthStackType>();
+const MainTab = createBottomTabNavigator<MainTabType>();
+const HomeStack = createStackNavigator<HomeStackType>();
+const AnswerStack = createStackNavigator<AnswerStackType>();
+const SettingStack = createStackNavigator<SettingStaackType>();
+
+const AuthNavigator = () => (
+  <AuthStack.Navigator headerMode="none">
+    <AuthStack.Screen name="SignInScreen" component={SignInScreen} />
+    <AuthStack.Screen name="SignUpScreen" component={SignUpScreen} />
+  </AuthStack.Navigator>
+);
+
+const HomeNavigator = () => (
+  <HomeStack.Navigator headerMode="none">
+    <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+  </HomeStack.Navigator>
+);
+
+const AnswerNavigator = () => (
+  <AnswerStack.Navigator headerMode="none">
+    <AnswerStack.Screen name="SelectBookScreen" component={SelectBookScreen} />
+  </AnswerStack.Navigator>
+);
+
+const SettingNavigator = () => (
+  <SettingStack.Navigator headerMode="none">
+    <SettingStack.Screen name="SettingScreen" component={SettingScreen} />
+  </SettingStack.Navigator>
+);
+
+const MainNavigator = () => (
+  <MainTab.Navigator
+    tabBar={props => <TabBar {...props} />}
+    tabBarOptions={{
+      activeTintColor: MAIN,
+      inactiveTintColor: BLACK,
+    }}
+    initialRouteName="HomeStack">
+    <MainTab.Screen name="HomeStack" component={HomeNavigator} />
+    <MainTab.Screen name="AnswerStack" component={AnswerNavigator} />
+    <MainTab.Screen name="SettingStack" component={SettingNavigator} />
+  </MainTab.Navigator>
+);
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <RootStack.Navigator initialRouteName="LoginStack" headerMode="none">
+            <RootStack.Screen name="LoginStack" component={AuthNavigator} />
+            <RootStack.Screen name="MainTab" component={MainNavigator} />
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
