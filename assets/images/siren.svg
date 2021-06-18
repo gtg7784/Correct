@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#BABABA" fill-rule="nonzero">
+            <g>
+                <path d="M0 16.447H17.899V21H0zM16.25 14.853V7.34 7.31C16.258 3.274 12.993.008 8.965 0 4.922.008 1.65 3.29 1.65 7.332v7.513c0 .008-.024.032-.024.032h14.657s-.032-.016-.032-.024z" transform="translate(-60.000000, -457.000000) translate(60.000000, 457.000000)"/>
+            </g>
+        </g>
+    </g>
+</svg>
