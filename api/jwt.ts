@@ -14,12 +14,12 @@ export const setToken = async ({access, refresh}: IToken) => {
 export const getToken = async () => {
   try {
     const token = await AsyncStorage.getItem('access-token');
-    const response = await api.post('/token​/verify', {
+    const response = await api.post('/token/verify', {
       token,
     });
 
     if (response.status === 200) {
-      return response.data.access;
+      return token;
     }
   } catch (error) {
     console.log(error.response);
