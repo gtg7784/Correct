@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: hp('6.6%'),
+    bottom: hp('3.3%'),
   },
 });
 
