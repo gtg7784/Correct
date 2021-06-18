@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TextInput, TextInputProps} from 'react-native';
-import {WHITE} from 'utils/color';
+import {PLACEHOLDER, WHITE} from 'utils/color';
 import {MEDIUM} from 'utils/font';
 import {hp, wp} from 'utils/size';
 
@@ -13,6 +13,7 @@ const Input: React.FC<IProps> = ({bottom = 0, top = 0, ...props}: IProps) => {
   return (
     <TextInput
       style={[styles.container, {marginTop: top, marginBottom: bottom}]}
+      placeholderTextColor={PLACEHOLDER}
       {...props}
     />
   );
