@@ -13,9 +13,9 @@ interface IProps extends TouchableOpacityProps {
   label: string;
 }
 
-const Button: React.FC<IProps> = ({label = '', ...props}: IProps) => {
+const Button: React.FC<IProps> = ({label = '', style, ...props}: IProps) => {
   return (
-    <TouchableOpacity style={styles.container} {...props}>
+    <TouchableOpacity style={[styles.container, style]} {...props}>
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>
   );
