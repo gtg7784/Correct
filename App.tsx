@@ -12,9 +12,24 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Provider} from 'react-redux';
 import {SignInScreen, SignUpScreen} from 'screens/Auth';
-import {HomeScreen} from 'screens/Home';
-import {SettingScreen} from 'screens/Setting';
-import {SelectBookScreen} from 'screens/Answer';
+import {
+  HomeScreen,
+  SelectQuestionCheckNumberScreen,
+  WriteAnswerCheckScreen,
+  CheckAnswerScreen,
+} from 'screens/Home';
+import {
+  ProfileScreen,
+  SettingScreen,
+  NoticeScreen,
+  NoticeDetailScreen,
+  ReportScreen,
+} from 'screens/Setting';
+import {
+  SelectBookScreen,
+  SelectQuestionNumberScreen,
+  WriteAnswerScreen,
+} from 'screens/Answer';
 import TabBar from 'components/TabBar';
 import {BLACK, MAIN} from 'utils/color';
 import configureStore from 'store';
@@ -38,18 +53,42 @@ const AuthNavigator = () => (
 const HomeNavigator = () => (
   <HomeStack.Navigator headerMode="none">
     <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+    <HomeStack.Screen
+      name="SelectQuestionCheckNumberScreen"
+      component={SelectQuestionCheckNumberScreen}
+    />
+    <HomeStack.Screen
+      name="WriteAnswerCheckScreen"
+      component={WriteAnswerCheckScreen}
+    />
+    <HomeStack.Screen name="CheckAnswerScreen" component={CheckAnswerScreen} />
   </HomeStack.Navigator>
 );
 
 const AnswerNavigator = () => (
   <AnswerStack.Navigator headerMode="none">
     <AnswerStack.Screen name="SelectBookScreen" component={SelectBookScreen} />
+    <AnswerStack.Screen
+      name="SelectQuestionNumberScreen"
+      component={SelectQuestionNumberScreen}
+    />
+    <AnswerStack.Screen
+      name="WriteAnswerScreen"
+      component={WriteAnswerScreen}
+    />
   </AnswerStack.Navigator>
 );
 
 const SettingNavigator = () => (
   <SettingStack.Navigator headerMode="none">
     <SettingStack.Screen name="SettingScreen" component={SettingScreen} />
+    <SettingStack.Screen name="ProfileScreen" component={ProfileScreen} />
+    <SettingStack.Screen name="NoticeScreen" component={NoticeScreen} />
+    <SettingStack.Screen
+      name="NoticeDetailScreen"
+      component={NoticeDetailScreen}
+    />
+    <SettingStack.Screen name="ReportScreen" component={ReportScreen} />
   </SettingStack.Navigator>
 );
 
