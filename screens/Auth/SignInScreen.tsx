@@ -17,8 +17,8 @@ import {hp, wp} from 'utils/size';
 import {BLACK, TRANSPARENT, WHITE} from 'utils/color';
 import {BOLD, MEDIUM} from 'utils/font';
 import api from 'api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {chagneUser} from 'store/reducers/user';
+import {getToken, setToken} from 'api/jwt';
 
 const SignInScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -42,22 +42,20 @@ const SignInScreen: React.FC = () => {
       });
 
       if (response.status === 200) {
-        await AsyncStorage.setItem('access-token', response.data.access);
-        await AsyncStorage.setItem('refresh-token', response.data.refresh);
-
+        setToken(response.data);
         setUser();
       }
     } catch (error) {
-      console.log(error.response);
       Alert.alert('로그인 실패', '아이디 또는 비밀번호가 잘못되었습니다.', [
         {text: '확인', onPress: () => {}},
       ]);
+      console.log(error.response);
     }
   };
 
   const setUser = async () => {
     try {
-      const token = await AsyncStorage.getItem('access-token');
+      const token = await getToken();
       const response = await api.get('/users/me', {
         headers: {
           Authorization: `Bearer ${token}`,
