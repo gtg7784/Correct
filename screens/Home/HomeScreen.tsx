@@ -11,7 +11,7 @@ import {RootState} from 'store/reducers';
 import api from 'api';
 
 const HomeScreen: React.FC = () => {
-  const [workbooks, setWorkbooks] = useState<IWorkBook[]>();
+  const [workbooks, setWorkbooks] = useState<IWorkbook[]>();
   const {user} = useSelector((state: RootState) => state.user);
 
   useEffect(() => {

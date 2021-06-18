@@ -1,7 +1,7 @@
 export {};
 
 declare global {
-  export interface IWorkBook {
+  export interface IWorkbook {
     id: number;
     name: string;
     bockcover_url: string;
