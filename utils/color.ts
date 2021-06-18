@@ -7,3 +7,5 @@ export const TRANSPARENT = 'transparent';
 export const SHADOW = 'rgba(183, 183, 183, 0.5)';
 export const GRAY = '#767676';
 export const BORDER = '#f6f6f6';
+export const LIGHTGRAY = '#BABABA';
+export const PLACEHOLDER = '#B7B7B7';
