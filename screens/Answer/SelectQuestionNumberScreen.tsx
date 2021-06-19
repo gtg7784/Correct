@@ -55,6 +55,7 @@ const SelectQuestionNumberScreen: React.FC = () => {
 
     Alert.alert('입력되지 않은 번호가 있습니다.');
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header title="작성" onPress={() => navigation.goBack()} />

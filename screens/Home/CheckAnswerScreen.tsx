@@ -48,10 +48,11 @@ const CheckAnswerScreen: React.FC = () => {
       },
     );
 
-    console.log(response.data);
-
     setRealAnswers(response.data);
-    renderInputs();
+
+    if (response.status === 200) {
+      renderInputs();
+    }
   };
 
   const renderInputs = () => {
@@ -59,9 +60,8 @@ const CheckAnswerScreen: React.FC = () => {
 
     for (let index = firstNumber; index <= lastNumber; index++) {
       inputElements.push(
-        <View style={styles.inputWrap}>
+        <View style={styles.inputWrap} key={`input-${index}`}>
           <Input
-            key={`input-${index}`}
             value={`${index}번 - ${answers[index]}`}
             placeholder={`${index}번`}
             keyboardType="decimal-pad"
